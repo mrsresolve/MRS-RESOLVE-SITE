@@ -237,6 +237,7 @@ ol {
   align-items: center;
   text-align: center;
   margin-inline: auto;
+  max-width: 52ch;
 }
 
 .section-head h2 {
@@ -918,6 +919,7 @@ ol {
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
   border-radius: var(--r-lg);
   overflow: hidden;
   background: #fff;
@@ -937,9 +939,13 @@ ol {
   aspect-ratio: 4 / 5;
 }
 
+.scard__media + .scard__body {
+  position: static;
+}
+
 @media (max-width: 559px) {
-  /* No celular o cartao vira linha: imagem menor a esquerda, texto a direita */
-  .scard {
+  /* No celular o cartao com foto vira linha: imagem a esquerda, texto a direita */
+  .scard:not(.scard--plain) {
     flex-direction: row;
     align-items: stretch;
   }
@@ -950,7 +956,7 @@ ol {
     aspect-ratio: auto;
   }
 
-  .scard__badge {
+  .scard__media + .scard__body .scard__badge {
     top: 0.625rem;
     left: 0.625rem;
     width: 36px;
@@ -974,21 +980,36 @@ ol {
 }
 
 .scard__badge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
+  margin-bottom: 1.25rem;
   border-radius: 50%;
   background: var(--orange);
   color: var(--navy);
 }
 
+/* Com foto o selo volta para cima da imagem */
+.scard__media + .scard__body .scard__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  margin-bottom: 0;
+}
+
 .scard__body {
   padding: 1.25rem 1.25rem 1.5rem;
+}
+
+/*
+ * Sem foto real o cartão não finge ter uma: fica só o ícone, o título e a
+ * descrição. Sete espaços reservados idênticos não informavam nada e
+ * dominavam a seção.
+ */
+.scard--plain .scard__body {
+  padding: 1.75rem 1.5rem 1.875rem;
 }
 
 .scard__body h3 {

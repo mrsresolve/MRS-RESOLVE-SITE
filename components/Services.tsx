@@ -16,24 +16,23 @@ export function Services() {
         </div>
 
         <ul className="services-grid">
-          {services.map((service, i) => (
+          {services.map((service) => (
             <li key={service.slug}>
-              <article className="scard">
-                <div className="scard__media">
-                  <Figure
-                    src={service.photo}
-                    alt={service.photoAlt ?? `${service.title} — MRS Resolve`}
-                    variant={(i % 5) as 0 | 1 | 2 | 3 | 4}
-                    tone={i % 2 === 0 ? "dark" : "light"}
-                    note="Foto do serviço"
-                    width={600}
-                    height={750}
-                  />
+              <article className={`scard${service.photo ? "" : " scard--plain"}`}>
+                {service.photo && (
+                  <div className="scard__media">
+                    <Figure
+                      src={service.photo}
+                      alt={service.photoAlt ?? `${service.title} — MRS Resolve`}
+                      width={600}
+                      height={750}
+                    />
+                  </div>
+                )}
+                <div className="scard__body">
                   <span className="scard__badge">
                     <ServiceIcon name={service.icon} />
                   </span>
-                </div>
-                <div className="scard__body">
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
                 </div>

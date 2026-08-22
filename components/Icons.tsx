@@ -105,20 +105,6 @@ const serviceIcons: Record<IconName, (p: { size: number }) => React.ReactElement
       <path d="M9.5 21v-6h5v6" />
     </svg>
   ),
-  predio: ({ size }) => (
-    <svg {...base} width={size} height={size}>
-      <path d="M5 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17" />
-      <path d="M15 10h3a1 1 0 0 1 1 1v10" />
-      <path d="M8.5 7h3M8.5 11h3M8.5 15h3" />
-      <path d="M3 21h18" />
-    </svg>
-  ),
-  parede: ({ size }) => (
-    <svg {...base} width={size} height={size}>
-      <rect x="3" y="4" width="18" height="16" rx="1.5" />
-      <path d="M3 9.5h18M3 15h18M9 4v5.5M15 9.5V15M9 15v5" />
-    </svg>
-  ),
   loja: ({ size }) => (
     <svg {...base} width={size} height={size}>
       <path d="M4 9h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9Z" />

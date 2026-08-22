@@ -7,6 +7,10 @@ visual e trazem um selo indicando o que entra no lugar.
 Já usam material real: o **hero** (vídeo da empresa), a **galeria de
 trabalhos** (8 fotos) e um dos **cards de destaque**.
 
+Os **cards de serviço** não usam espaço reservado: sem foto real eles ficam
+só com o ícone, o título e a descrição. Ao preencher `photo` em `lib/site.ts`,
+a imagem aparece automaticamente.
+
 Nenhuma imagem de banco de imagens foi usada.
 
 ## Passo a passo
@@ -23,7 +27,7 @@ foto otimizada; **sem** `src` desenha o espaço reservado.
 | Lugar | Arquivo a editar | O que fazer |
 | --- | --- | --- |
 | Cards de destaque | `components/Highlights.tsx` | Adicionar `photo` em cada item de `cards` |
-| Serviços | `lib/site.ts` | Preencher `photo` e `photoAlt` em cada serviço |
+| Serviços | `lib/site.ts` | Preencher `photo` e `photoAlt` — o cartão só ganha imagem quando há foto |
 | Galeria de trabalhos | `lib/site.ts` (`works`) | Já usa fotos reais — adicionar novos itens |
 | Diferenciais | `components/Differentiators.tsx` | Adicionar `src` no `<Figure>` |
 

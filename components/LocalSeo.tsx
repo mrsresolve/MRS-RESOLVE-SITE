@@ -1,4 +1,4 @@
-import { areas, services, site } from "@/lib/site";
+import { areas, site } from "@/lib/site";
 
 /**
  * Bloco de contexto local. Existe para dar ao Google e ao visitante a
@@ -14,11 +14,11 @@ export function LocalSeo() {
           Empresa de pintura em {site.city}
         </h2>
         <p>
-          A {site.name} faz {services[0].title.toLowerCase()} e{" "}
-          {services[3].title.toLowerCase()} em {site.city}, atendendo casas,
-          apartamentos, lojas, escritórios e áreas comuns de condomínios. O
-          serviço inclui a preparação da superfície, a proteção do ambiente e a
-          conferência do acabamento.
+          A {site.name} faz pintura residencial e comercial em {site.city}:
+          pintura de casa, pintura de apartamento por cômodo ou completa,
+          pintura interna de paredes e tetos, pintura externa de fachadas e
+          muros, e áreas comuns de condomínios. O serviço inclui a preparação
+          da superfície, a proteção do ambiente e a conferência do acabamento.
         </p>
         <p>
           Regiões com atendimento prioritário: {areas.join(", ")}.

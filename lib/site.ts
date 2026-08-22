@@ -37,13 +37,7 @@ export const nav: NavItem[] = [
   { label: "Áreas atendidas", href: "#areas" },
 ];
 
-export type IconName =
-  | "casa"
-  | "predio"
-  | "parede"
-  | "loja"
-  | "fachada"
-  | "condominio";
+export type IconName = "casa" | "loja" | "fachada" | "condominio";
 
 export type Service = {
   slug: string;
@@ -56,51 +50,48 @@ export type Service = {
 };
 
 /**
- * Serviços confirmados no briefing. Não incluir textura, grafiato,
- * impermeabilização ou pintura de madeira/metal sem confirmação da empresa.
+ * Serviços confirmados no briefing.
+ *
+ * A lista da copy trazia sete itens que se sobrepunham: "pintura
+ * residencial" já é "casas + apartamentos", e "pintura interna" é o que
+ * residencial e comercial significam. Aqui ficam só os quatro realmente
+ * distintos — três por tipo de imóvel e um pelo tipo de trabalho, que é
+ * operacionalmente diferente (altura, fachada, muro).
+ *
+ * Os termos de busca dos itens que saíram continuam no texto dos cards e no
+ * bloco de contexto local. Cada um ganha página própria quando houver
+ * conteúdo real (docs/03_SEO/SEO-LOCAL.md).
+ *
+ * Não incluir textura, grafiato, impermeabilização ou pintura de
+ * madeira/metal sem confirmação da empresa.
  */
 export const services: Service[] = [
   {
     slug: "pintura-residencial",
     title: "Pintura residencial",
     description:
-      "Casas e apartamentos, com preparação e acabamento profissional.",
-    icon: "casa",
-  },
-  {
-    slug: "pintura-de-apartamentos",
-    title: "Pintura de apartamentos",
-    description: "Renovação de ambientes, pintura completa ou por cômodo.",
-    icon: "predio",
-  },
-  {
-    slug: "pintura-de-casas",
-    title: "Pintura de casas",
-    description: "Áreas internas e externas, muros e ambientes residenciais.",
+      "Pintura de casas e apartamentos, por cômodo ou no imóvel completo, com preparação e acabamento profissional.",
     icon: "casa",
   },
   {
     slug: "pintura-comercial",
     title: "Pintura comercial",
-    description: "Lojas, escritórios e ambientes de trabalho.",
+    description:
+      "Lojas, escritórios e ambientes de trabalho, com execução combinada para não parar a operação.",
     icon: "loja",
   },
   {
-    slug: "pintura-interna",
-    title: "Pintura interna",
-    description: "Paredes, tetos e ambientes internos.",
-    icon: "parede",
-  },
-  {
     slug: "pintura-externa",
-    title: "Pintura externa",
-    description: "Fachadas, muros e áreas externas.",
+    title: "Fachadas e áreas externas",
+    description:
+      "Pintura externa de fachadas, muros e áreas descobertas, com o preparo que a exposição ao tempo exige.",
     icon: "fachada",
   },
   {
     slug: "condominios",
     title: "Condomínios",
-    description: "Pintura de áreas comuns e serviços programados.",
+    description:
+      "Pintura de áreas comuns e serviços programados, executados por etapas para preservar a circulação.",
     icon: "condominio",
   },
 ];
