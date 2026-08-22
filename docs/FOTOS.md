@@ -5,7 +5,18 @@ existirem, as imagens dessas seções são desenhadas em SVG com a identidade
 visual e trazem um selo indicando o que entra no lugar.
 
 Já usam material real: o **hero** (vídeo da empresa), a **galeria de
-trabalhos** (8 fotos) e um dos **cards de destaque**.
+trabalhos** (8 fotos) e dois dos três **cards de destaque**.
+
+### Enquadramento
+
+Os cartões recortam a foto para caber na proporção deles. Quando o corte
+centralizado não serve — um retrato quase sempre perde a cabeça —, passe
+`focus` com um valor de `object-position`:
+
+```tsx
+photo: "/fotos/equipe-uniforme.webp",
+focus: "50% 15%",   // puxa o recorte para cima
+```
 
 Os **cards de serviço** não usam espaço reservado: sem foto real eles ficam
 só com o ícone, o título e a descrição. Ao preencher `photo` em `lib/site.ts`,
@@ -26,7 +37,7 @@ foto otimizada; **sem** `src` desenha o espaço reservado.
 
 | Lugar | Arquivo a editar | O que fazer |
 | --- | --- | --- |
-| Cards de destaque | `components/Highlights.tsx` | Adicionar `photo` em cada item de `cards` |
+| Cards de destaque | `components/Highlights.tsx` | Adicionar `photo` (e `focus`, se o corte centralizado não servir) |
 | Serviços | `lib/site.ts` | Preencher `photo` e `photoAlt` — o cartão só ganha imagem quando há foto |
 | Galeria de trabalhos | `lib/site.ts` (`works`) | Já usa fotos reais — adicionar novos itens |
 | Diferenciais | `components/Differentiators.tsx` | Já usa o Short do YouTube |

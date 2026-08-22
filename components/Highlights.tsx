@@ -9,6 +9,8 @@ type Card = {
   accent?: boolean;
   /** Foto real; sem ela o Figure desenha o espaço reservado da marca. */
   photo?: string;
+  /** Enquadramento da foto, quando o corte centralizado não serve. */
+  focus?: string;
   variant?: 0 | 1 | 2 | 3 | 4;
   tone?: "dark" | "light";
   note?: string;
@@ -19,10 +21,11 @@ const cards: Card[] = [
     tag: "Quem somos",
     title: "Empresa de pintura residencial e comercial",
     href: "#diferenciais",
-    variant: 1,
-    tone: "light",
-    note: "Equipe em serviço",
-    alt: "Equipe da MRS Resolve preparando um ambiente para pintura",
+    photo: "/fotos/equipe-uniforme.webp",
+    // A foto é quadrada e o cartão é 4:3: sem puxar para cima, o corte
+    // centralizado comeria parte da cabeça.
+    focus: "50% 15%",
+    alt: "Profissional da MRS Resolve com a camisa da empresa",
   },
   {
     tag: "Trabalhos",
@@ -69,6 +72,7 @@ export function Highlights() {
                   <Figure
                     src={card.photo}
                     alt={card.alt}
+                    focus={card.focus}
                     variant={card.variant}
                     tone={card.tone}
                     note={card.note}

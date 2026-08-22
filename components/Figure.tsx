@@ -12,6 +12,12 @@ export type FigureProps = {
   tone?: "dark" | "light";
   /** Texto do selo que marca o espaço reservado. */
   note?: string;
+  /**
+   * Ponto de interesse da foto, no formato de `object-position`. O recorte
+   * padrão é centralizado; um retrato quase sempre precisa puxar para cima
+   * para não perder a cabeça.
+   */
+  focus?: string;
   className?: string;
 };
 
@@ -32,6 +38,7 @@ export function Figure({
   variant = 0,
   tone = "dark",
   note = "Foto do trabalho real",
+  focus,
   className,
 }: FigureProps) {
   if (src) {
@@ -44,6 +51,7 @@ export function Figure({
         priority={priority}
         sizes="(max-width: 900px) 100vw, 50vw"
         className={className}
+        style={focus ? { objectPosition: focus } : undefined}
       />
     );
   }
