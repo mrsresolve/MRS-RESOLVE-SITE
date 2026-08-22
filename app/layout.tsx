@@ -1,0 +1,71 @@
+import type { Metadata, Viewport } from "next";
+import { Manrope } from "next/font/google";
+import { seo, site } from "@/lib/site";
+import { JsonLd } from "@/components/JsonLd";
+import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: seo.title,
+    template: `%s | ${site.name}`,
+  },
+  description: seo.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: site.url,
+    siteName: site.name,
+    title: seo.ogTitle,
+    description: seo.ogDescription,
+    images: [
+      {
+        url: "/logos/mrs-resolve-logo-horizontal.png",
+        width: 600,
+        height: 99,
+        alt: `${site.name} — ${site.tagline} em ${site.city}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.ogTitle,
+    description: seo.ogDescription,
+  },
+  robots: { index: true, follow: true },
+  icons: {
+    icon: "/logos/mrs-resolve-icone-192.png",
+    apple: "/logos/mrs-resolve-avatar-512.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#172554",
+  colorScheme: "light",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="pt-BR" className={manrope.variable}>
+      <body>
+        <a className="skip-link" href="#conteudo">
+          Ir para o conteúdo
+        </a>
+        {children}
+        <JsonLd />
+      </body>
+    </html>
+  );
+}
