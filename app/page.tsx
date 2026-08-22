@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Highlights } from "@/components/Highlights";
 import { Services } from "@/components/Services";
-import { Works } from "@/components/Works";
+import { Gallery } from "@/components/Gallery";
 import { Process } from "@/components/Process";
 import { Differentiators } from "@/components/Differentiators";
 import { Areas } from "@/components/Areas";
@@ -29,7 +29,7 @@ export default function Home() {
           <Services />
         </Reveal>
         <Reveal>
-          <Works />
+          <Gallery />
         </Reveal>
         <Reveal>
           <Process />

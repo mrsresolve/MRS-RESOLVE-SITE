@@ -38,7 +38,7 @@ lib/
   whatsapp.ts    montagem da mensagem e do link wa.me
 public/
   logos/         logos oficiais da marca
-  fotos/         fotos reais das obras (ver docs/FOTOS.md)
+  fotos/         fotos reais dos trabalhos (ver docs/FOTOS.md)
   videos/        vídeo do hero: desktop e mobile, WebM + MP4 e pôsteres
 docs/            pacote original de copy, briefing e SEO
 ```
@@ -67,7 +67,7 @@ hover dos botões. O laranja puro não atinge 4,5:1 nesses usos.
 2. Hero em tela cheia com vídeo de fundo
 3. Cards de destaque
 4. Serviços
-5. Trabalhos realizados (comparador antes/depois)
+5. Trabalhos realizados (galeria com fotos reais)
 6. Como funciona
 7. Diferenciais
 8. Áreas atendidas
@@ -102,6 +102,7 @@ está o texto) e na vertical no mobile. Detalhes em
 - `prefers-reduced-motion` respeitado
 - A página renderiza inteira **sem JavaScript** — inclusive os links de orçamento
 - Texto do hero verificado quadro a quadro sobre o vídeo: mínimo de 8:1
+- Legendas da galeria medidas sobre cada foto: mínimo de 14,8:1
 - ~114 kB de JS no primeiro carregamento; imagens com dimensões explícitas
 - Vídeo do hero: 675 kB (mobile) ou 912 kB (desktop), nunca os dois
 
@@ -135,7 +136,7 @@ sitemap e JSON-LD.
 
 ## Antes de publicar
 
-- [ ] **Substituir os espaços reservados das seções internas por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). O hero já usa o vídeo real
+- [ ] **Substituir os espaços reservados restantes por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). Hero (vídeo), galeria (5 fotos) e um card de destaque já usam material real; faltam os cards de serviço e o bloco de diferenciais
 - [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL`
 - [ ] Confirmar o WhatsApp `(61) 99377-7428` e o e-mail em `lib/site.ts`
 - [ ] Confirmar com a empresa os 7 serviços listados. Textura, grafiato,

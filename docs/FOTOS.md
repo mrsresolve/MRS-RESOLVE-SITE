@@ -1,9 +1,11 @@
 # Como trocar os espaços reservados por fotos reais
 
 O pacote da marca não incluiu fotos de obras da MRS Resolve. Enquanto elas não
-existirem, as imagens das seções internas são desenhadas em SVG com a
-identidade visual e trazem um selo indicando o que entra no lugar. O hero é
-exceção: ele já roda o vídeo real da empresa.
+existirem, as imagens dessas seções são desenhadas em SVG com a identidade
+visual e trazem um selo indicando o que entra no lugar.
+
+Já usam material real: o **hero** (vídeo da empresa), a **galeria de
+trabalhos** (5 fotos) e um dos **cards de destaque**.
 
 Nenhuma imagem de banco de imagens foi usada.
 
@@ -20,9 +22,9 @@ foto otimizada; **sem** `src` desenha o espaço reservado.
 
 | Lugar | Arquivo a editar | O que fazer |
 | --- | --- | --- |
-| Cards de destaque | `components/Highlights.tsx` | Adicionar `src` em cada item de `cards` |
+| Cards de destaque | `components/Highlights.tsx` | Adicionar `photo` em cada item de `cards` |
 | Serviços | `lib/site.ts` | Preencher `photo` e `photoAlt` em cada serviço |
-| Antes e depois | `components/Works.tsx` | Preencher `beforeSrc` e `afterSrc` em cada item |
+| Galeria de trabalhos | `lib/site.ts` (`works`) | Já usa fotos reais — adicionar novos itens |
 | Diferenciais | `components/Differentiators.tsx` | Adicionar `src` no `<Figure>` |
 
 Exemplo em `lib/site.ts`:
@@ -37,6 +39,52 @@ Exemplo em `lib/site.ts`:
   photoAlt: "Sala de estar recém-pintada em apartamento na Asa Norte",
 }
 ```
+
+## Galeria de trabalhos
+
+A seção "Trabalhos realizados" usa fotos reais, listadas em `works` no
+`lib/site.ts`. Para adicionar um trabalho novo:
+
+1. Salve a foto em `public/fotos/` (ver otimização abaixo).
+2. Acrescente um item ao array `works`.
+
+```ts
+{
+  slug: "cozinha-noroeste",
+  tag: "Interna",                 // etiqueta laranja no cartão
+  title: "Cozinha no Noroeste",
+  caption: "Uma linha sobre o serviço.",
+  photo: "/fotos/cozinha-noroeste.webp",
+  alt: "Cozinha recém-pintada em apartamento no Noroeste",
+  shape: "tall",                  // "tall" = retrato, "wide" = paisagem
+}
+```
+
+### Como a grade se organiza
+
+No desktop a grade tem 6 colunas: cada `tall` ocupa 2 e cada `wide` ocupa 3.
+Os 5 trabalhos atuais fecham duas fileiras cheias — 3 retratos em cima, 2 em
+paisagem embaixo. Ao mudar a quantidade, mantenha a conta fechando em
+múltiplos de 6 para não sobrar buraco (por exemplo: 3 `tall` + 2 `wide`, ou
+6 `tall`, ou 4 `wide`).
+
+### Otimização das fotos
+
+```bash
+ffmpeg -i foto-original.jpg -vf "scale=1200:-2" \
+  -c:v libwebp -quality 78 -compression_level 6 public/fotos/nome.webp
+```
+
+O export é estático, então o Next não otimiza imagem em build — o arquivo que
+você colocar é o que vai para o ar.
+
+### Seção antes/depois
+
+O comparador antes/depois está **oculto**: ele existe em
+`components/Works.tsx` e `components/BeforeAfter.tsx`, mas não entra na home.
+Ele só faz sentido com os dois lados do mesmo ambiente fotografados. Quando
+esses pares existirem, preencha `beforeSrc` e `afterSrc` em `Works.tsx` e
+troque `<Gallery />` por `<Works />` em `app/page.tsx` — ou use os dois.
 
 ## Vídeo do hero
 
@@ -86,13 +134,14 @@ necessário.
 
 Lista do briefing (`docs/02_INSTRUCOES/BRIEFING-DESIGN-UX.md`):
 
-1. Antes/depois — pelo menos 4 serviços reais.
+1. Antes/depois — pares do mesmo ambiente, para reativar o comparador.
 2. Preparação — proteção de piso e móveis.
 3. Execução — profissional com EPI, ambiente organizado.
 4. Detalhe de acabamento.
 5. Opcional — veículo, uniforme ou equipe.
 
-O item "hero" da lista original já está resolvido pelo vídeo.
+O item "hero" da lista original já está resolvido pelo vídeo, e a galeria já
+tem 5 trabalhos reais.
 
 ## Texto alternativo
 

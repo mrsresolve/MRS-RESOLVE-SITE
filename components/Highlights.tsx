@@ -1,32 +1,43 @@
 import { Figure } from "./Figure";
 import { ArrowUpRight } from "./Icons";
 
-const cards = [
+type Card = {
+  tag: string;
+  title: string;
+  href: string;
+  alt: string;
+  accent?: boolean;
+  /** Foto real; sem ela o Figure desenha o espaço reservado da marca. */
+  photo?: string;
+  variant?: 0 | 1 | 2 | 3 | 4;
+  tone?: "dark" | "light";
+  note?: string;
+};
+
+const cards: Card[] = [
   {
     tag: "Quem somos",
     title: "Empresa de pintura residencial e comercial",
     href: "#diferenciais",
-    variant: 1 as const,
-    tone: "light" as const,
+    variant: 1,
+    tone: "light",
     note: "Equipe em serviço",
     alt: "Equipe da MRS Resolve preparando um ambiente para pintura",
   },
   {
-    tag: "Antes e depois",
-    title: "Veja o antes e o depois dos ambientes",
+    tag: "Trabalhos",
+    title: "Veja ambientes já entregues",
     href: "#trabalhos",
-    variant: 2 as const,
-    tone: "dark" as const,
-    note: "Antes / depois",
-    alt: "Comparação entre parede antes e depois da pintura",
+    photo: "/fotos/fachada-varanda-residencial.webp",
+    alt: "Fachada de casa com varanda coberta pintada pela MRS Resolve",
     accent: true,
   },
   {
     tag: "Onde atendemos",
     title: "Atendimento em Brasília e regiões próximas",
     href: "#areas",
-    variant: 3 as const,
-    tone: "light" as const,
+    variant: 3,
+    tone: "light",
     note: "Atendimento local",
     alt: "Vista de área residencial atendida em Brasília",
   },
@@ -56,6 +67,7 @@ export function Highlights() {
 
                 <div className="hcard__media">
                   <Figure
+                    src={card.photo}
                     alt={card.alt}
                     variant={card.variant}
                     tone={card.tone}

@@ -1,8 +1,12 @@
 import { BeforeAfter } from "./BeforeAfter";
 
 /**
- * Placeholders ate a MRS Resolve enviar as fotos reais. Cada item vira uma
- * obra de verdade preenchendo beforeSrc/afterSrc (ver docs/FOTOS.md).
+ * SEÇÃO OCULTA — não está na home hoje.
+ *
+ * O comparador antes/depois só faz sentido com os dois lados do mesmo
+ * ambiente fotografados. Enquanto esses pares não existem, a home mostra a
+ * galeria (components/Gallery.tsx). Para reativar: preencher beforeSrc e
+ * afterSrc de cada item e trocar <Gallery /> por <Works /> em app/page.tsx.
  */
 const works = [
   {

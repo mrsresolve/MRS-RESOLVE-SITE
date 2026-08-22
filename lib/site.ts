@@ -105,6 +105,70 @@ export const services: Service[] = [
   },
 ];
 
+export type Work = {
+  slug: string;
+  /** Etiqueta curta do tipo de serviço. */
+  tag: string;
+  title: string;
+  caption: string;
+  photo: string;
+  alt: string;
+  /**
+   * Formato do cartão na galeria. As fotos são todas em retrato; os cartões
+   * "wide" recebem um recorte em paisagem para quebrar o ritmo da grade.
+   */
+  shape: "tall" | "wide";
+};
+
+/** Trabalhos entregues pela MRS Resolve. Fotos reais em /public/fotos. */
+export const works: Work[] = [
+  {
+    slug: "sala-reuniao",
+    tag: "Comercial",
+    title: "Sala de reunião",
+    caption: "Paredes e forro em tom escuro, com recorte no rodapé de tijolo.",
+    photo: "/fotos/sala-reuniao-comercial.webp",
+    alt: "Sala de reunião com paredes e forro pintados em azul escuro, sanca iluminada e piso de madeira",
+    shape: "tall",
+  },
+  {
+    slug: "fachada-varanda",
+    tag: "Externa",
+    title: "Fachada e varanda",
+    caption: "Estrutura, pilares e paredes externas de uma casa térrea.",
+    photo: "/fotos/fachada-varanda-residencial.webp",
+    alt: "Fachada de casa com varanda coberta, pilares pintados e piso externo",
+    shape: "tall",
+  },
+  {
+    slug: "sala-apartamento",
+    tag: "Interna",
+    title: "Sala de apartamento",
+    caption: "Ambiente completo entregue pronto para a mudança.",
+    photo: "/fotos/sala-apartamento-interna.webp",
+    alt: "Sala de apartamento vazia com paredes claras recém-pintadas e teto com sanca",
+    shape: "tall",
+  },
+  {
+    slug: "entrada-pergolado",
+    tag: "Residencial",
+    title: "Entrada com pergolado",
+    caption: "Pergolado, pilares e entrada durante a execução do serviço.",
+    photo: "/fotos/entrada-pergolado-residencial.webp",
+    alt: "Entrada de casa com pergolado de madeira e pilares pintados, durante a execução",
+    shape: "wide",
+  },
+  {
+    slug: "area-comum",
+    tag: "Condomínios",
+    title: "Área comum",
+    caption: "Forro em caixotões e esquadrias de um edifício em obra.",
+    photo: "/fotos/area-comum-forro-esquadrias.webp",
+    alt: "Área comum de edifício com forro em caixotões pintado e esquadrias em arco",
+    shape: "wide",
+  },
+];
+
 export const processSteps = [
   {
     number: "01",

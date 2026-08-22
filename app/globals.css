@@ -1003,134 +1003,131 @@ ol {
 }
 
 /* --------------------------------------------------------------------------
-   Trabalhos realizados / antes e depois
+   Galeria de trabalhos
    -------------------------------------------------------------------------- */
 
-.works {
+.gallery {
   display: grid;
   gap: 1.25rem;
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-@media (min-width: 860px) {
-  .works {
+@media (min-width: 620px) {
+  .gallery {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.compare {
+@media (min-width: 1000px) {
+  /*
+   * Seis colunas para acomodar as duas fileiras: três retratos em cima,
+   * dois recortes em paisagem embaixo. As cinco fotos fecham a grade sem
+   * deixar buraco.
+   */
+  .gallery {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .gallery__item--tall {
+    grid-column: span 2;
+  }
+
+  .gallery__item--wide {
+    grid-column: span 3;
+  }
+}
+
+.gcard {
+  position: relative;
+  display: block;
+  height: 100%;
+  margin: 0;
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: var(--navy);
+  isolation: isolate;
 }
 
-.compare__viewport {
+.gcard__media {
   position: relative;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  touch-action: pan-y;
+  aspect-ratio: 3 / 4;
 }
 
-.compare__layer {
-  position: absolute;
-  inset: 0;
+.gallery__item--wide .gcard__media {
+  aspect-ratio: 4 / 3;
 }
 
-.compare__layer > * {
+.gcard__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 420ms var(--ease);
 }
 
-.compare__layer--after {
-  /* Recortado pelo valor do slider */
-  clip-path: inset(0 0 0 var(--split, 50%));
+.gcard:hover img {
+  transform: scale(1.04);
 }
 
-.compare__label {
-  position: absolute;
-  bottom: 0.875rem;
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--r-pill);
-  font-size: 0.625rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: rgba(23, 37, 84, 0.82);
-  color: #fff;
-  backdrop-filter: blur(6px);
-  pointer-events: none;
-}
-
-.compare__label--before {
-  left: 0.875rem;
-}
-
-.compare__label--after {
-  right: 0.875rem;
-  background: var(--orange);
-  color: var(--navy);
-}
-
-.compare__handle {
+/* Véu para a legenda: só na base, preservando a foto */
+.gcard::after {
+  content: "";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  appearance: none;
-  cursor: ew-resize;
-}
-
-.compare__handle::-webkit-slider-thumb {
-  appearance: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--orange);
-  box-shadow: 0 2px 10px rgba(23, 37, 84, 0.3);
-  cursor: ew-resize;
-}
-
-.compare__handle::-moz-range-thumb {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--orange);
-  box-shadow: 0 2px 10px rgba(23, 37, 84, 0.3);
-  cursor: ew-resize;
-}
-
-.compare__line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--split, 50%);
-  width: 2px;
-  background: #fff;
   pointer-events: none;
+  /*
+   * Paradas em pixels, não em porcentagem: a legenda tem sempre a mesma
+   * altura, mas os cartões variam (retrato e paisagem). Em porcentagem o
+   * texto dos cartões baixos caía na parte clara do degradê.
+   */
+  background: linear-gradient(
+    to top,
+    rgba(9, 17, 42, 0.93) 0,
+    rgba(9, 17, 42, 0.9) 90px,
+    rgba(10, 19, 46, 0.6) 150px,
+    rgba(10, 19, 46, 0.2) 215px,
+    transparent 265px
+  );
 }
 
-.compare__caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.125rem 1.25rem;
+.gcard__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 1.5rem 1.375rem 1.375rem;
+  color: #fff;
 }
 
-.compare__caption h3 {
-  font-size: 1.0625rem;
+.gcard__tag {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-pill);
+  background: var(--orange);
+  color: var(--navy);
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
-.compare__caption p {
+.gcard__caption h3 {
+  color: #fff;
+  font-size: 1.125rem;
+  margin-bottom: 0.3rem;
+}
+
+.gcard__caption p {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 40ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gcard:hover img {
+    transform: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
