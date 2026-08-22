@@ -1210,22 +1210,129 @@ ol {
 
 @media (min-width: 980px) {
   .diffs {
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
   }
 }
 
+/* Coluna do vídeo: estreita, porque o Short é vertical */
 .diffs__media {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  position: sticky;
-  top: 110px;
+  display: flex;
+  justify-content: center;
 }
 
-.diffs__media > * {
+@media (min-width: 980px) {
+  .diffs__media {
+    position: sticky;
+    top: 110px;
+    justify-content: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Short do YouTube (9:16)
+   -------------------------------------------------------------------------- */
+
+.short {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--navy);
+  isolation: isolate;
+}
+
+@media (min-width: 980px) {
+  .short {
+    max-width: 360px;
+  }
+}
+
+.short__poster {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 420ms var(--ease);
+}
+
+.short:hover .short__poster {
+  transform: scale(1.03);
+}
+
+/* Escurece o topo e a base para o botão e o rótulo se sustentarem */
+.short::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(9, 17, 42, 0.88) 0,
+    rgba(9, 17, 42, 0.55) 88px,
+    rgba(9, 17, 42, 0.12) 160px,
+    rgba(9, 17, 42, 0.16) 100%
+  );
+}
+
+.short__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  padding-left: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--navy);
+  box-shadow: 0 10px 32px -10px rgba(9, 17, 42, 0.7);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.short:hover .short__play {
+  background: var(--orange-hover);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.short__label {
+  position: absolute;
+  left: 1.125rem;
+  right: 1.125rem;
+  bottom: 1.125rem;
+  z-index: 1;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-shadow: 0 1px 12px rgba(6, 12, 32, 0.5);
+}
+
+.short--playing {
+  background: #000;
+}
+
+.short__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .short:hover .short__poster,
+  .short:hover .short__play {
+    transform: none;
+  }
+
+  .short:hover .short__play {
+    transform: translate(-50%, -50%);
+  }
 }
 
 .diff-list {

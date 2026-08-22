@@ -1,18 +1,17 @@
 import { differentiators } from "@/lib/site";
-import { Figure } from "./Figure";
 import { CheckIcon } from "./Icons";
+import { YouTubeShort } from "./YouTubeShort";
 
 export function Differentiators() {
   return (
     <section className="section" id="diferenciais">
       <div className="shell diffs">
         <div className="diffs__media">
-          <Figure
-            alt="Piso e móveis protegidos antes do início da pintura"
-            variant={4}
-            note="Preparação e proteção"
-            width={800}
-            height={1000}
+          <YouTubeShort
+            id="t5HRP2AFHUE"
+            title="Pintura externa — MRS Resolve"
+            poster="/videos/short-pintura-externa-poster.webp"
+            posterAlt="Parede externa de casa recém-pintada, com o piso protegido por lona durante o serviço"
           />
         </div>
 

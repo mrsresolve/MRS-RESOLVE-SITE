@@ -29,7 +29,7 @@ foto otimizada; **sem** `src` desenha o espaço reservado.
 | Cards de destaque | `components/Highlights.tsx` | Adicionar `photo` em cada item de `cards` |
 | Serviços | `lib/site.ts` | Preencher `photo` e `photoAlt` — o cartão só ganha imagem quando há foto |
 | Galeria de trabalhos | `lib/site.ts` (`works`) | Já usa fotos reais — adicionar novos itens |
-| Diferenciais | `components/Differentiators.tsx` | Adicionar `src` no `<Figure>` |
+| Diferenciais | `components/Differentiators.tsx` | Já usa o Short do YouTube |
 
 Exemplo em `lib/site.ts`:
 
@@ -99,6 +99,48 @@ O comparador antes/depois está **oculto**: ele existe em
 Ele só faz sentido com os dois lados do mesmo ambiente fotografados. Quando
 esses pares existirem, preencha `beforeSrc` e `afterSrc` em `Works.tsx` e
 troque `<Gallery />` por `<Works />` em `app/page.tsx` — ou use os dois.
+
+## Short do YouTube (seção de diferenciais)
+
+A seção "Serviço profissional do início ao fim" mostra um Short do canal da
+MRS Resolve, em 9:16, ao lado da lista de diferenciais.
+
+O player do YouTube **não** carrega junto com a página. O que aparece é a
+miniatura, hospedada aqui em `public/videos/`, e o iframe só entra quando
+alguém clica. Isso evita várias centenas de kB e cookies de terceiros para
+quem nunca vai assistir. Sem JavaScript, o mesmo elemento é um link que abre
+o vídeo no YouTube.
+
+### Para trocar o vídeo
+
+Em `components/Differentiators.tsx`, no `<YouTubeShort>`:
+
+```tsx
+<YouTubeShort
+  id="t5HRP2AFHUE"          // ID do vídeo
+  title="Pintura externa — MRS Resolve"
+  poster="/videos/short-pintura-externa-poster.webp"
+  posterAlt="Descrição do que aparece no vídeo"
+/>
+```
+
+Para baixar a miniatura vertical do novo vídeo:
+
+```bash
+curl -o /tmp/short.jpg "https://i.ytimg.com/vi/NOVO_ID/oardefault.jpg"
+ffmpeg -i /tmp/short.jpg -vf "scale=720:-2" -c:v libwebp -quality 76 \
+  public/videos/short-NOME-poster.webp
+```
+
+`oardefault.jpg` é a miniatura na proporção original do Short (1080×1920).
+As outras (`maxresdefault`, `hqdefault`) vêm em 16:9 e não servem aqui.
+
+### Sobre as faixas pretas
+
+O vídeo atual foi gravado em 3:4 e o YouTube o encaixou no quadro 9:16 do
+Shorts, o que gera faixas pretas em cima e embaixo. Elas fazem parte do
+vídeo, não do site — aparecem igual na miniatura e na reprodução. Um vídeo
+gravado direto em 9:16 preenche o quadro inteiro.
 
 ## Vídeo do hero
 

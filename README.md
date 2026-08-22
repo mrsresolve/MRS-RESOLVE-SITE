@@ -69,7 +69,7 @@ hover dos botões. O laranja puro não atinge 4,5:1 nesses usos.
 4. Serviços
 5. Trabalhos realizados (galeria com fotos reais)
 6. Como funciona
-7. Diferenciais
+7. Diferenciais (com Short do YouTube em 9:16)
 8. Áreas atendidas
 9. Orçamento rápido
 10. Perguntas frequentes
@@ -105,6 +105,8 @@ está o texto) e na vertical no mobile. Detalhes em
 - Legendas da galeria medidas sobre cada foto: mínimo de 9,9:1
 - ~114 kB de JS no primeiro carregamento; imagens com dimensões explícitas
 - Vídeo do hero: 675 kB (mobile) ou 912 kB (desktop), nunca os dois
+- O player do YouTube só carrega ao clicar: a home não faz nenhuma requisição
+  a terceiros
 
 ## SEO
 
@@ -136,7 +138,7 @@ sitemap e JSON-LD.
 
 ## Antes de publicar
 
-- [ ] **Substituir os espaços reservados restantes por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). Hero (vídeo), galeria (5 fotos) e um card de destaque já usam material real; falta o bloco de diferenciais; os cards de serviço mostram imagem só quando houver foto
+- [ ] **Substituir os espaços reservados restantes por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). Hero (vídeo), galeria (5 fotos) e um card de destaque já usam material real; os cards de serviço mostram imagem só quando houver foto; o bloco de diferenciais já usa o Short do YouTube
 - [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL`
 - [ ] Confirmar o WhatsApp `(61) 99377-7428` e o e-mail em `lib/site.ts`
 - [ ] Confirmar com a empresa os 7 serviços listados. Textura, grafiato,
