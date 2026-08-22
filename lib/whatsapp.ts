@@ -22,8 +22,8 @@ const regionPhrase: Record<string, string> = {
   "Asa Norte": "na Asa Norte",
   Noroeste: "no Noroeste",
   Sudoeste: "no Sudoeste",
-  "Park Way": "no Park Way",
   "Jardim Botânico": "no Jardim Botânico",
+  "Região Central de Brasília": "na região central de Brasília",
   "Outra região": "em outra região de Brasília",
 };
 

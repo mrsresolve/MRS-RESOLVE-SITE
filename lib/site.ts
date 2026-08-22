@@ -248,16 +248,21 @@ export const areas = [
   "Asa Norte",
   "Noroeste",
   "Sudoeste",
-  "Park Way",
   "Jardim Botânico",
   "Região Central de Brasília",
 ] as const;
 
-/** Opções do formulário curto de qualificação. */
+/**
+ * Opções do formulário curto de qualificação.
+ *
+ * As regiões vêm de `areas`, mais uma saída para quem está fora da lista.
+ * Ao mexer em `areas`, lembre da preposição correspondente em
+ * lib/whatsapp.ts, usada para montar a mensagem.
+ */
 export const quoteOptions = {
   property: ["Casa", "Apartamento", "Comércio", "Condomínio"],
   service: ["Interna", "Externa", "Completa", "Não sei ainda"],
-  region: [...areas.slice(0, 8), "Outra região"],
+  region: [...areas, "Outra região"],
 } as const;
 
 export const faq = [
@@ -269,7 +274,7 @@ export const faq = [
   {
     question: "Vocês atendem qual região?",
     answer:
-      "Brasília e região, com atendimento prioritário no Lago Sul, Lago Norte, Asa Sul, Asa Norte, Noroeste, Sudoeste, Park Way, Jardim Botânico e região central. Se a sua região não estiver na lista, consulte pelo WhatsApp.",
+      "Brasília e região, com atendimento prioritário no Lago Sul, Lago Norte, Asa Sul, Asa Norte, Noroeste, Sudoeste, Jardim Botânico e região central. Se a sua região não estiver na lista, consulte pelo WhatsApp.",
   },
   {
     question: "Preciso tirar os móveis do ambiente?",

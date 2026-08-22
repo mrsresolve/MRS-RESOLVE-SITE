@@ -151,6 +151,18 @@ sitemap e JSON-LD.
 - [ ] Adicionar Google Analytics / Tag Manager, se desejado
 - [ ] Cadastrar o sitemap no Search Console
 
+## Decisões que divergem do pacote original
+
+Os arquivos em `docs/` são o pacote como foi entregue e ficam intactos, como
+registro. Onde o site diverge deles:
+
+| O que mudou | Por quê |
+| --- | --- |
+| **Park Way saiu das regiões atendidas** | A empresa confirmou que não atende a região. Não criar `/pintura-park-way`, apesar de o plano de SEO do pacote listar essa página. |
+| **Sete serviços viraram quatro** | "Pintura residencial" já é "casas + apartamentos", e "pintura interna" é o que residencial e comercial significam. Os termos de busca continuam no texto. |
+| **Antes/depois está oculto** | Só faz sentido com os dois lados do mesmo ambiente fotografados. A home mostra a galeria no lugar. |
+| **O hero usa vídeo, não foto** | A empresa enviou vídeo próprio para desktop e celular. |
+
 ## Promessas evitadas de propósito
 
 Seguindo as regras de copy do pacote, o site **não** promete prazo de orçamento
