@@ -114,10 +114,12 @@ export type Work = {
   photo: string;
   alt: string;
   /**
-   * Formato do cartão na galeria. As fotos são todas em retrato; os cartões
-   * "wide" recebem um recorte em paisagem para quebrar o ritmo da grade.
+   * Formato do cartão na galeria, escolhido pela orientação da foto:
+   * "tall" para retrato, "medium" e "wide" para paisagem. A grade tem 6
+   * colunas — tall e medium ocupam 2, wide ocupa 3 —, então cada fileira
+   * precisa somar 6 para não deixar buraco.
    */
-  shape: "tall" | "wide";
+  shape: "tall" | "medium" | "wide";
 };
 
 /** Trabalhos entregues pela MRS Resolve. Fotos reais em /public/fotos. */
@@ -166,6 +168,33 @@ export const works: Work[] = [
     photo: "/fotos/area-comum-forro-esquadrias.webp",
     alt: "Área comum de edifício com forro em caixotões pintado e esquadrias em arco",
     shape: "wide",
+  },
+  {
+    slug: "telhado-residencial",
+    tag: "Telhado",
+    title: "Telhado residencial",
+    caption: "Telhas pintadas uma a uma, do beiral até a cumeeira.",
+    photo: "/fotos/telhado-residencial.webp",
+    alt: "Telhado de telhas cerâmicas recém-pintadas, vistas de perto em ângulo",
+    shape: "medium",
+  },
+  {
+    slug: "telhado-cobertura",
+    tag: "Telhado",
+    title: "Cobertura completa",
+    caption: "Vista da cobertura inteira depois da pintura das telhas.",
+    photo: "/fotos/telhado-cobertura-completa.webp",
+    alt: "Cobertura inteira de telhas cerâmicas pintadas, com céu azul ao fundo",
+    shape: "medium",
+  },
+  {
+    slug: "telhado-casa-terrea",
+    tag: "Telhado",
+    title: "Telhado de casa térrea",
+    caption: "Todas as águas pintadas, incluindo espigões e beirais.",
+    photo: "/fotos/telhado-casa-terrea.webp",
+    alt: "Telhado de casa térrea com todas as águas pintadas, visto do alto",
+    shape: "medium",
   },
 ];
 

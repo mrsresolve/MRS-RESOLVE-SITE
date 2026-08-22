@@ -5,7 +5,7 @@ existirem, as imagens dessas seções são desenhadas em SVG com a identidade
 visual e trazem um selo indicando o que entra no lugar.
 
 Já usam material real: o **hero** (vídeo da empresa), a **galeria de
-trabalhos** (5 fotos) e um dos **cards de destaque**.
+trabalhos** (8 fotos) e um dos **cards de destaque**.
 
 Nenhuma imagem de banco de imagens foi usada.
 
@@ -56,17 +56,27 @@ A seção "Trabalhos realizados" usa fotos reais, listadas em `works` no
   caption: "Uma linha sobre o serviço.",
   photo: "/fotos/cozinha-noroeste.webp",
   alt: "Cozinha recém-pintada em apartamento no Noroeste",
-  shape: "tall",                  // "tall" = retrato, "wide" = paisagem
+  shape: "tall",                  // ver formatos abaixo
 }
 ```
 
 ### Como a grade se organiza
 
-No desktop a grade tem 6 colunas: cada `tall` ocupa 2 e cada `wide` ocupa 3.
-Os 5 trabalhos atuais fecham duas fileiras cheias — 3 retratos em cima, 2 em
-paisagem embaixo. Ao mudar a quantidade, mantenha a conta fechando em
-múltiplos de 6 para não sobrar buraco (por exemplo: 3 `tall` + 2 `wide`, ou
-6 `tall`, ou 4 `wide`).
+No desktop a grade tem 6 colunas. O `shape` acompanha a orientação da foto:
+
+| Formato | Colunas | Proporção | Para |
+| --- | --- | --- | --- |
+| `tall` | 2 | 3:4 | fotos em retrato |
+| `medium` | 2 | 4:3 | fotos em paisagem |
+| `wide` | 3 | 4:3 | paisagem em destaque |
+
+Os 8 trabalhos atuais fecham três fileiras cheias: 3 `tall`, 2 `wide` e
+3 `medium`. Ao mudar a quantidade, mantenha **cada fileira somando 6
+colunas** para não sobrar buraco.
+
+O véu escuro que garante a leitura da legenda fica na própria legenda, não no
+cartão. Assim ele tem sempre a altura do texto mais o esmaecimento, seja num
+cartão alto de retrato ou num baixo de paisagem.
 
 ### Otimização das fotos
 

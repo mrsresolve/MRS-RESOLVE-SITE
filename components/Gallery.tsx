@@ -15,8 +15,8 @@ export function Gallery() {
           <span className="tag">Trabalhos</span>
           <h2>Trabalhos realizados</h2>
           <p>
-            Ambientes internos, fachadas e áreas comuns entregues em Brasília e
-            região.
+            Ambientes internos, fachadas, telhados e áreas comuns entregues em
+            Brasília e região.
           </p>
         </div>
 

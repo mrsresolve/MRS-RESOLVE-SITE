@@ -102,7 +102,7 @@ está o texto) e na vertical no mobile. Detalhes em
 - `prefers-reduced-motion` respeitado
 - A página renderiza inteira **sem JavaScript** — inclusive os links de orçamento
 - Texto do hero verificado quadro a quadro sobre o vídeo: mínimo de 8:1
-- Legendas da galeria medidas sobre cada foto: mínimo de 14,8:1
+- Legendas da galeria medidas sobre cada foto: mínimo de 9,9:1
 - ~114 kB de JS no primeiro carregamento; imagens com dimensões explícitas
 - Vídeo do hero: 675 kB (mobile) ou 912 kB (desktop), nunca os dois
 
