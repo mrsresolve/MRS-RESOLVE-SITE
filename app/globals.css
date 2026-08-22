@@ -394,20 +394,71 @@ ol {
    Header
    -------------------------------------------------------------------------- */
 
+/*
+ * O header fica sobre o vídeo do hero: começa transparente com a marca em
+ * branco e, ao rolar, vira a barra branca sólida com a marca em cor.
+ */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(14px);
+  background: transparent;
   border-bottom: 1px solid transparent;
   transition: border-color var(--dur) var(--ease),
-    background var(--dur) var(--ease);
+    background var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
 }
 
 .header[data-scrolled="true"] {
   border-bottom-color: var(--line);
   background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+}
+
+/* Estado sobre o vídeo */
+.header:not([data-scrolled="true"]) .header__logo img {
+  /* Versão monocromática branca da marca (item 4 da prancha) */
+  filter: brightness(0) invert(1);
+}
+
+.header:not([data-scrolled="true"]) .header__nav a {
+  color: #fff;
+}
+
+.header:not([data-scrolled="true"]) .header__nav a:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.header:not([data-scrolled="true"]) .header__phone {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.header:not([data-scrolled="true"]) .header__phone:hover {
+  border-color: #fff;
+}
+
+.header:not([data-scrolled="true"]) .header__toggle {
+  color: #fff;
+  background: rgba(12, 22, 52, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* Com o menu aberto o painel é branco, então a barra também precisa ser */
+.header:has(.mobile-menu) {
+  background: #fff;
+}
+
+.header:has(.mobile-menu) .header__logo img {
+  filter: none;
+}
+
+.header:has(.mobile-menu) .header__toggle {
+  color: var(--navy);
+  background: #fff;
+  border-color: var(--line-strong);
 }
 
 .header__inner {
@@ -421,6 +472,7 @@ ol {
 .header__logo img {
   height: 34px;
   width: auto;
+  transition: filter var(--dur) var(--ease);
 }
 
 .header__nav {
@@ -522,51 +574,106 @@ ol {
 }
 
 /* --------------------------------------------------------------------------
-   Hero
+   Hero — vídeo em tela cheia
    -------------------------------------------------------------------------- */
 
 .hero {
-  padding-top: clamp(1rem, 2vw, 1.75rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.hero__frame {
   position: relative;
-  border-radius: var(--r-xl);
-  overflow: hidden;
   isolation: isolate;
-  min-height: clamp(480px, 72vh, 660px);
+  /* svh acompanha a barra do navegador no celular; vh é o fallback */
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  overflow: hidden;
+  background: var(--navy);
 }
 
 .hero__media {
   position: absolute;
   inset: 0;
   z-index: -2;
+  /* Pôster como fundo: aparece antes do vídeo carregar, com
+     prefers-reduced-motion e quando não há JavaScript */
+  background-image: url("/videos/hero-mobile-poster.webp");
+  background-size: cover;
+  background-position: center;
 }
 
-.hero__media > * {
+@media (min-width: 768px) {
+  .hero__media {
+    background-image: url("/videos/hero-desktop-poster.webp");
+  }
+}
+
+.hero__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* O vídeo é claro; o filtro tira o excesso de estouro nas paredes brancas
+     e ajuda o texto a se sustentar junto com o overlay */
+  filter: saturate(1.05) contrast(1.02) brightness(0.88);
 }
 
-/* Véu escuro para garantir contraste AA do texto sobre a imagem */
-.hero__frame::after {
-  content: "";
+/*
+ * Overlay em degradê. O vídeo tem paredes brancas puras (255) exatamente
+ * onde o texto fica, então a camada precisa ser densa na área do texto e
+ * abrir onde só aparece a imagem. Medido para manter branco sobre o fundo
+ * composto acima de 4,5:1 no pior quadro.
+ */
+.hero__overlay {
   position: absolute;
   inset: 0;
   z-index: -1;
+  /*
+   * No retrato o texto ocupa quase toda a altura, então a camada só abre
+   * perto do topo. As paradas foram medidas contra o quadro mais claro do
+   * vídeo (paredes brancas puras) para manter 4,5:1 com o texto branco.
+   */
   background: linear-gradient(
-      100deg,
-      rgba(10, 20, 50, 0.92) 0%,
-      rgba(12, 24, 58, 0.78) 42%,
-      rgba(14, 28, 66, 0.35) 78%
-    ),
-    linear-gradient(to top, rgba(10, 20, 50, 0.6), transparent 45%);
+    to top,
+    rgba(9, 17, 42, 0.95) 0%,
+    rgba(9, 17, 42, 0.9) 25%,
+    rgba(10, 19, 46, 0.84) 50%,
+    rgba(11, 20, 48, 0.78) 70%,
+    rgba(12, 22, 52, 0.72) 82%,
+    rgba(13, 24, 56, 0.55) 92%,
+    rgba(13, 24, 56, 0.42) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  /* No desktop o texto ocupa a esquerda: o peso vai para esse lado e a
+     direita fica mais aberta, deixando a cena do vídeo aparecer */
+  .hero__overlay {
+    background:
+      linear-gradient(
+        100deg,
+        rgba(9, 17, 42, 0.95) 0%,
+        rgba(9, 17, 42, 0.9) 32%,
+        rgba(11, 20, 48, 0.72) 52%,
+        rgba(13, 24, 56, 0.45) 74%,
+        rgba(13, 24, 56, 0.34) 100%
+      ),
+      linear-gradient(to top, rgba(9, 17, 42, 0.66), transparent 34%),
+      linear-gradient(to bottom, rgba(9, 17, 42, 0.5), transparent 20%);
+  }
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+  /* Espaço para o header sobreposto e para a barra fixa do mobile */
+  padding-top: calc(76px + clamp(2rem, 8vh, 5rem));
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+@media (max-width: 899px) {
+  .hero__inner {
+    padding-bottom: calc(78px + 1.5rem);
+  }
 }
 
 .hero__body {
@@ -602,14 +709,17 @@ ol {
   font-size: var(--step-4);
   letter-spacing: -0.035em;
   margin-bottom: 1.25rem;
+  /* Reforço extra sobre as áreas mais claras do vídeo */
+  text-shadow: 0 2px 24px rgba(6, 12, 32, 0.45);
 }
 
 .hero__lede {
   font-size: var(--step-1);
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
   font-weight: 500;
   max-width: 34ch;
   margin-bottom: 2rem;
+  text-shadow: 0 1px 16px rgba(6, 12, 32, 0.4);
 }
 
 .hero__support {
@@ -618,11 +728,11 @@ ol {
   gap: 0.5rem;
   margin-top: 1.25rem;
   font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.88);
   font-weight: 600;
 }
 
-/* Faixa de "abas" no rodapé do hero (referência visual) */
+/* Faixa de "abas" no rodapé do hero */
 .hero__strip {
   display: grid;
   gap: 0.75rem;
@@ -641,8 +751,8 @@ ol {
   gap: 1rem;
   padding: 0.9rem 1.25rem;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(12, 22, 52, 0.42);
   backdrop-filter: blur(10px);
   color: #fff;
   font-size: 0.6875rem;
@@ -653,7 +763,7 @@ ol {
 }
 
 .hero__chip:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(12, 22, 52, 0.66);
 }
 
 .hero__strip li:first-child .hero__chip {
@@ -674,7 +784,7 @@ ol {
 }
 
 @media (max-width: 559px) {
-  /* CTA em largura total: o texto do botao nao deve quebrar em duas linhas */
+  /* CTA em largura total: o texto do botão não deve quebrar em duas linhas */
   .hero .cta-pair {
     display: block;
   }
@@ -687,9 +797,8 @@ ol {
     display: none;
   }
 
-  /* Abas mais compactas, sem numeracao, para nao empurrar o conteudo */
+  /* Abas mais compactas, sem numeração, para não empurrar o conteúdo */
   .hero__strip {
-    flex-direction: row;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;

@@ -39,6 +39,7 @@ lib/
 public/
   logos/         logos oficiais da marca
   fotos/         fotos reais das obras (ver docs/FOTOS.md)
+  videos/        vídeo do hero: desktop e mobile, WebM + MP4 e pôsteres
 docs/            pacote original de copy, briefing e SEO
 ```
 
@@ -62,8 +63,8 @@ hover dos botões. O laranja puro não atinge 4,5:1 nesses usos.
 
 ## Estrutura da home
 
-1. Header (fixo)
-2. Hero
+1. Header (sobreposto ao hero, vira barra branca ao rolar)
+2. Hero em tela cheia com vídeo de fundo
 3. Cards de destaque
 4. Serviços
 5. Trabalhos realizados (comparador antes/depois)
@@ -76,6 +77,23 @@ hover dos botões. O laranja puro não atinge 4,5:1 nesses usos.
 12. Bloco de contexto local
 13. Rodapé + barra de CTA fixa no mobile
 
+## Hero em vídeo
+
+O hero ocupa 100% da tela, sem bordas, com o vídeo da MRS Resolve rodando mudo
+e em loop. São duas versões — paisagem para desktop, retrato para o celular — e
+o navegador baixa **apenas uma**: a escolha acontece em JavaScript, porque dois
+`<video>` no HTML fariam o navegador baixar os dois, mesmo o escondido por CSS.
+
+Cada versão tem WebM/VP9 (menor, para Chrome e Firefox) e MP4/H.264 (Safari e
+o resto). Os arquivos foram reencodados sem trilha de áudio — o vídeo toca
+mudo, então o áudio só pesaria no download. Antes de o vídeo chegar, e para
+quem tem `prefers-reduced-motion` ativado, aparece o pôster do primeiro quadro.
+
+O texto fica legível sobre a imagem por camadas de degradê calibradas contra o
+quadro mais claro do vídeo: na horizontal no desktop (peso à esquerda, onde
+está o texto) e na vertical no mobile. Detalhes em
+[`docs/FOTOS.md`](docs/FOTOS.md).
+
 ## Acessibilidade e performance
 
 - Auditado com **axe-core**: 0 violações WCAG 2.1 AA no desktop e no mobile
@@ -83,7 +101,9 @@ hover dos botões. O laranja puro não atinge 4,5:1 nesses usos.
 - Navegação por teclado completa, com skip link e anel de foco de duas camadas
 - `prefers-reduced-motion` respeitado
 - A página renderiza inteira **sem JavaScript** — inclusive os links de orçamento
-- ~113 kB de JS no primeiro carregamento; imagens com dimensões explícitas
+- Texto do hero verificado quadro a quadro sobre o vídeo: mínimo de 8:1
+- ~114 kB de JS no primeiro carregamento; imagens com dimensões explícitas
+- Vídeo do hero: 675 kB (mobile) ou 912 kB (desktop), nunca os dois
 
 ## SEO
 
@@ -115,7 +135,7 @@ sitemap e JSON-LD.
 
 ## Antes de publicar
 
-- [ ] **Substituir os espaços reservados por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md)
+- [ ] **Substituir os espaços reservados das seções internas por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). O hero já usa o vídeo real
 - [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL`
 - [ ] Confirmar o WhatsApp `(61) 99377-7428` e o e-mail em `lib/site.ts`
 - [ ] Confirmar com a empresa os 7 serviços listados. Textura, grafiato,
