@@ -1,22 +1,27 @@
 # Como trocar os espaços reservados por fotos reais
 
-O pacote da marca não incluiu fotos de obras da MRS Resolve. Enquanto elas não
-existirem, as imagens dessas seções são desenhadas em SVG com a identidade
-visual e trazem um selo indicando o que entra no lugar.
+**Toda imagem da home usa material real da MRS Resolve**: o vídeo do hero, as
+8 fotos da galeria, as 3 fotos dos cards de destaque e o Short do YouTube na
+seção de diferenciais.
 
-Já usam material real: o **hero** (vídeo da empresa), a **galeria de
-trabalhos** (8 fotos) e dois dos três **cards de destaque**.
+O desenho de espaço reservado continua no código (`components/Figure.tsx`)
+como rede de segurança: um `<Figure>` novo sem `src` desenha um grafismo da
+marca com um selo, em vez de quebrar. Nenhum aparece na home hoje.
 
 ### Enquadramento
 
-Os cartões recortam a foto para caber na proporção deles. Quando o corte
-centralizado não serve — um retrato quase sempre perde a cabeça —, passe
-`focus` com um valor de `object-position`:
+Os cartões recortam a foto para caber na proporção deles (4:3). Quando o corte
+centralizado não serve — uma foto quadrada com pessoa quase sempre perde a
+cabeça —, passe `focus` com um valor de `object-position`:
 
 ```tsx
 photo: "/fotos/equipe-uniforme.webp",
 focus: "50% 15%",   // puxa o recorte para cima
 ```
+
+Os valores em uso: `50% 15%` em "Quem somos" (retrato quadrado),
+`50% 30%` em "Onde atendemos" (quadrada, para não cortar o boné) e o padrão
+centralizado em "Trabalhos" (foto já em paisagem).
 
 Os **cards de serviço** não usam espaço reservado: sem foto real eles ficam
 só com o ícone, o título e a descrição. Ao preencher `photo` em `lib/site.ts`,

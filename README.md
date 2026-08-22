@@ -138,7 +138,7 @@ sitemap e JSON-LD.
 
 ## Antes de publicar
 
-- [ ] **Substituir os espaços reservados restantes por fotos reais** — ver [`docs/FOTOS.md`](docs/FOTOS.md). Hero (vídeo), galeria (8 fotos), dois cards de destaque e o Short do YouTube já usam material real; falta só o card de destaque "Onde atendemos"; os cards de serviço mostram imagem só quando houver foto
+- [x] **Fotos reais** — a home não tem mais nenhum espaço reservado: vídeo no hero, 8 fotos na galeria, 3 nos cards de destaque e o Short do YouTube. Os cards de serviço são de ícone e texto por opção; ganham imagem ao preencher `photo` em `lib/site.ts` (ver [`docs/FOTOS.md`](docs/FOTOS.md))
 - [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL`
 - [ ] Confirmar o WhatsApp `(61) 99377-7428` e o e-mail em `lib/site.ts`
 - [ ] Confirmar com a empresa os 7 serviços listados. Textura, grafiato,

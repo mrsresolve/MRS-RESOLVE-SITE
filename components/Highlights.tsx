@@ -39,10 +39,10 @@ const cards: Card[] = [
     tag: "Onde atendemos",
     title: "Atendimento em Brasília e regiões próximas",
     href: "#areas",
-    variant: 3,
-    tone: "light",
-    note: "Atendimento local",
-    alt: "Vista de área residencial atendida em Brasília",
+    photo: "/fotos/pintor-uniforme-rolo.webp",
+    // Também quadrada: o recorte sobe para não cortar o boné.
+    focus: "50% 30%",
+    alt: "Profissional da MRS Resolve pintando uma parede com rolo, em ambiente com vista para a cidade",
   },
 ];
 
