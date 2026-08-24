@@ -125,21 +125,42 @@ A arquitetura está pronta para as rotas planejadas em
 rota em `app/sitemap.ts`. **Não duplicar a home trocando o nome da região** —
 cada página precisa de conteúdo próprio.
 
-## Deploy (Netlify)
+## Deploy
 
-`netlify.toml` já está configurado:
+O site é estático (`next build` gera a pasta `out/`), então sobe em qualquer
+hospedagem de arquivos.
 
-- build: `npm run build`
-- publish: `out`
+### Vercel
 
-Defina a variável `NEXT_PUBLIC_SITE_URL` com o domínio oficial. Sem ela, o site
-usa `https://www.mrsresolve.com.br` como padrão em canonical, Open Graph,
-sitemap e JSON-LD.
+A Vercel detecta o Next.js sozinha — não precisa de `vercel.json` nem de
+GitHub Actions. **A aba Actions do repositório fica vazia mesmo com tudo
+funcionando**: a Vercel usa o próprio app do GitHub, não os Actions. Para
+saber se o deploy rodou, olhe em Deployments no painel da Vercel.
+
+Ao configurar o projeto, aponte a branch de produção para a branch que deve
+ir ao ar.
+
+### Netlify
+
+`netlify.toml` já está no repositório: build `npm run build`, publish `out`.
+
+### A variável de domínio
+
+`NEXT_PUBLIC_SITE_URL` define o domínio em canonical, Open Graph, sitemap e
+JSON-LD. Sem ela, o site usa `https://www.mrsresolve.com.br`.
+
+**Cadastrar a variável com valor vazio já derrubou um deploy.** O painel da
+hospedagem aceita o campo em branco, e `new URL("")` quebrava o build inteiro
+com `ERR_INVALID_URL` — o erro aparecia como "Failed to collect page data for
+/_not-found", que não indica em nada a causa real. Hoje `lib/site.ts` trata
+valor vazio, sem protocolo, com barra final e inválido, sempre caindo no
+domínio padrão e avisando no log do build. Ainda assim: se não for usar,
+**não cadastre** a variável em vez de deixá-la em branco.
 
 ## Antes de publicar
 
 - [x] **Fotos reais** — a home não tem mais nenhum espaço reservado: vídeo no hero, 8 fotos na galeria, 3 nos cards de destaque e o Short do YouTube. Os cards de serviço são de ícone e texto por opção; ganham imagem ao preencher `photo` em `lib/site.ts` (ver [`docs/FOTOS.md`](docs/FOTOS.md))
-- [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL`
+- [ ] Confirmar o domínio oficial e definir `NEXT_PUBLIC_SITE_URL` (ver **Deploy** acima — não deixe em branco)
 - [ ] Confirmar o WhatsApp `(61) 99377-7428` e o e-mail em `lib/site.ts`
 - [ ] Confirmar com a empresa os 7 serviços listados. Textura, grafiato,
       impermeabilização e pintura de madeira/metal **não** foram incluídos por

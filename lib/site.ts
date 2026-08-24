@@ -5,13 +5,46 @@
  * ou regiões, edite aqui — os componentes apenas renderizam estes dados.
  */
 
+/** Domínio usado quando NEXT_PUBLIC_SITE_URL não está configurada. */
+const DOMINIO_PADRAO = "https://www.mrsresolve.com.br";
+
+/**
+ * Resolve o domínio canônico a partir da variável de ambiente.
+ *
+ * Cuidados aprendidos na prática, porque isso roda em build e derruba o
+ * deploy inteiro quando dá errado:
+ *
+ * - a variável pode existir **vazia** no painel da hospedagem. `??` não
+ *   pega isso, e `new URL("")` quebra o build com ERR_INVALID_URL;
+ * - pode vir sem protocolo ("mrsresolve.com.br"), o que também é inválido
+ *   para `new URL`;
+ * - pode vir com barra final ou caminho, gerando canonical com barra dupla.
+ *
+ * O `.origin` normaliza tudo e nunca deixa barra no fim.
+ */
+function resolverDominio(): string {
+  const bruto = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!bruto) return DOMINIO_PADRAO;
+
+  const candidato = /^https?:\/\//i.test(bruto) ? bruto : `https://${bruto}`;
+  try {
+    return new URL(candidato).origin;
+  } catch {
+    console.warn(
+      `[site] NEXT_PUBLIC_SITE_URL inválida (${JSON.stringify(bruto)}); ` +
+        `usando ${DOMINIO_PADRAO}`,
+    );
+    return DOMINIO_PADRAO;
+  }
+}
+
 export const site = {
   name: "MRS Resolve",
   tagline: "Pintura profissional",
   city: "Brasília",
   state: "DF",
   /** Trocar pelo domínio oficial antes de publicar (ver .env.example). */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mrsresolve.com.br",
+  url: resolverDominio(),
   email: "contato@mrsresolve.com.br",
   phoneDisplay: "(61) 99377-7428",
   /** Formato internacional, apenas dígitos — usado no link do WhatsApp. */
