@@ -147,7 +147,7 @@ ir ao ar.
 ### A variável de domínio
 
 `NEXT_PUBLIC_SITE_URL` define o domínio em canonical, Open Graph, sitemap e
-JSON-LD. Sem ela, o site usa `https://www.mrsresolve.com.br`.
+JSON-LD. Sem ela, o site usa `https://mrsresolve.com.br`.
 
 **Cadastrar a variável com valor vazio já derrubou um deploy.** O painel da
 hospedagem aceita o campo em branco, e `new URL("")` quebrava o build inteiro

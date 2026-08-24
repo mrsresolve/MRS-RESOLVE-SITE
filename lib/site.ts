@@ -6,7 +6,7 @@
  */
 
 /** Domínio usado quando NEXT_PUBLIC_SITE_URL não está configurada. */
-const DOMINIO_PADRAO = "https://www.mrsresolve.com.br";
+const DOMINIO_PADRAO = "https://mrsresolve.com.br";
 
 /**
  * Resolve o domínio canônico a partir da variável de ambiente.
