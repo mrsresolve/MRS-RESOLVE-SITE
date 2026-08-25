@@ -1,8 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
+import Script from "next/script";
 import { seo, site } from "@/lib/site";
 import { JsonLd } from "@/components/JsonLd";
 import "./globals.css";
+
+/** Google tag (gtag.js) — conversões do Google Ads. */
+const GOOGLE_TAG_ID = "AW-18408807505";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -65,6 +69,16 @@ export default function RootLayout({
         </a>
         {children}
         <JsonLd />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GOOGLE_TAG_ID}');`}
+        </Script>
       </body>
     </html>
   );
