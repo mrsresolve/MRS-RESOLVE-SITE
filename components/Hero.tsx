@@ -38,8 +38,10 @@ export function Hero() {
             </a>
             <a
               className="btn-arrow"
-              href="#orcamento"
-              aria-label="Ir para o formulário de orçamento"
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Falar no WhatsApp"
             >
               <ArrowUpRight />
             </a>

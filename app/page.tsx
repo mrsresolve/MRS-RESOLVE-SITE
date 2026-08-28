@@ -6,7 +6,6 @@ import { Gallery } from "@/components/Gallery";
 import { Process } from "@/components/Process";
 import { Differentiators } from "@/components/Differentiators";
 import { Areas } from "@/components/Areas";
-import { QuoteForm } from "@/components/QuoteForm";
 import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
 import { LocalSeo } from "@/components/LocalSeo";
@@ -39,9 +38,6 @@ export default function Home() {
         </Reveal>
         <Reveal>
           <Areas />
-        </Reveal>
-        <Reveal>
-          <QuoteForm />
         </Reveal>
         <Reveal>
           <Faq />

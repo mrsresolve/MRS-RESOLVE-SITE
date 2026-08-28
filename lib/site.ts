@@ -226,12 +226,12 @@ export const processSteps = [
   {
     number: "01",
     title: "Solicite seu orçamento",
-    description: "Conte o que precisa e envie fotos pelo WhatsApp.",
+    description: "Conte o que precisa pelo WhatsApp e agende uma visita.",
   },
   {
     number: "02",
     title: "Avaliamos o serviço",
-    description: "Entendemos o ambiente, a área e o tipo de pintura.",
+    description: "Visitamos o local para avaliar a área e o tipo de pintura.",
   },
   {
     number: "03",
@@ -249,7 +249,7 @@ export const differentiators = [
   {
     title: "Agilidade no atendimento",
     description:
-      "Você manda as fotos pelo WhatsApp e a conversa começa pelo essencial: o que será pintado e onde fica.",
+      "A conversa pelo WhatsApp já começa pelo essencial: o que será pintado e onde fica, para agendarmos a visita.",
   },
   {
     title: "Organização durante a execução",
@@ -285,24 +285,11 @@ export const areas = [
   "Região Central de Brasília",
 ] as const;
 
-/**
- * Opções do formulário curto de qualificação.
- *
- * As regiões vêm de `areas`, mais uma saída para quem está fora da lista.
- * Ao mexer em `areas`, lembre da preposição correspondente em
- * lib/whatsapp.ts, usada para montar a mensagem.
- */
-export const quoteOptions = {
-  property: ["Casa", "Apartamento", "Comércio", "Condomínio"],
-  service: ["Interna", "Externa", "Completa", "Não sei ainda"],
-  region: [...areas, "Outra região"],
-} as const;
-
 export const faq = [
   {
     question: "Como funciona o orçamento?",
     answer:
-      "Você descreve o que precisa e envia fotos pelo WhatsApp. Com as imagens e o tamanho aproximado do ambiente conseguimos avaliar o serviço e retornar com a proposta.",
+      "Você entra em contato pelo WhatsApp contando o que precisa. Para um orçamento mais preciso, vamos até o local avaliar o ambiente antes de fechar a proposta.",
   },
   {
     question: "Vocês atendem qual região?",

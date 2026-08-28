@@ -36,7 +36,9 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <a href="#orcamento">Orçamento</a>
+                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+                  Orçamento
+                </a>
               </li>
             </ul>
           </div>
