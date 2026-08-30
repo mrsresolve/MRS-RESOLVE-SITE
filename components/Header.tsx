@@ -34,7 +34,7 @@ export function Header() {
   return (
     <header className="header" data-scrolled={scrolled}>
       <div className="shell header__inner">
-        <a className="header__logo" href="#topo" aria-label={`${site.name} — início`}>
+        <a className="header__logo" href="/#topo" aria-label={`${site.name} — início`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logos/mrs-resolve-logo-horizontal.png"

@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// Login do painel. Hoje só o dono usa — Role fica pronto para o dia em
+/// que outra pessoa precisar entrar, sem exigir migration nova.
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  posts     Post[]
+}
+
+enum Role {
+  ADMIN
+}
+
+/// Um clique em botão de WhatsApp. Nasce anônimo — não existe formulário
+/// no site, então nome/telefone só existem se alguém digitar depois de ver
+/// a conversa. ipHash nunca guarda o IP em texto puro (LGPD).
+model Lead {
+  id          String     @id @default(cuid())
+  createdAt   DateTime   @default(now())
+
+  origem      String?
+  midia       String?
+  campanha    String?
+  termo       String?
+  gclid       String?
+  referrer    String?
+  paginaUrl   String
+  botao       String
+  dispositivo String
+  navegador   String?
+  sistema     String?
+  cidade      String?
+  regiao      String?
+  ipHash      String?
+
+  status      LeadStatus @default(NOVO)
+  observacao  String?
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([campanha])
+}
+
+enum LeadStatus {
+  NOVO
+  ATENDIDO
+  FECHADO
+  PERDIDO
+}
+
+/// Um mês de resultado, lançado à mão pelo dono uma vez por mês — fecha a
+/// lacuna entre "quantos clicaram" e "quantos viraram serviço", sem exigir
+/// que ele use o painel lead a lead.
+model ResultadoMensal {
+  id             String   @id @default(cuid())
+  ano            Int
+  mes            Int
+  servicosFechados Int    @default(0)
+  valorTotal     Decimal? @db.Decimal(10, 2)
+  observacao     String?
+  atualizadoEm   DateTime @updatedAt
+
+  @@unique([ano, mes])
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  titulo      String
+  resumo      String
+  conteudo    String
+  capaUrl     String?
+  capaAlt     String?
+  metaTitulo  String?
+  metaDesc    String?
+  status      PostStatus @default(RASCUNHO)
+  publicadoEm DateTime?
+  autorId     String
+  autor       User       @relation(fields: [autorId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([status, publicadoEm])
+}
+
+enum PostStatus {
+  RASCUNHO
+  PUBLICADO
+}
+
+/// Tira os IDs de rastreio do código — editáveis no painel, sem deploy.
+model TagConfig {
+  id    String  @id @default(cuid())
+  chave String  @unique
+  valor String
+  ativo Boolean @default(true)
+}

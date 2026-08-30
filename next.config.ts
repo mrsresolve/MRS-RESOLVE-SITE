@@ -1,15 +1,27 @@
 import type { NextConfig } from "next";
 
 /**
- * Export estatico: o site nao tem backend — o formulario de orcamento monta
- * um link de WhatsApp no proprio navegador. Isso mantem o deploy simples
- * (Netlify serve HTML puro) e o Core Web Vitals no melhor cenario possivel.
+ * O site público continua pré-renderizado (páginas estáticas por padrão no
+ * App Router). O que muda ao sair do `output: "export"` é a possibilidade de
+ * ter rotas dinâmicas ao lado dele: /admin, /login, /api/* e /ir/whatsapp,
+ * que precisam de servidor para autenticação e banco de dados.
  */
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
-  images: { unoptimized: true },
   reactStrictMode: true,
+  // Mantido do export estático: preserva a barra final nas URLs (o formato
+  // já indexado pelo Google) mesmo rodando em servidor agora.
+  trailingSlash: true,
+
+  async headers() {
+    return [
+      {
+        // Reforça o robots.ts: o painel não deve ser indexado mesmo se
+        // alguém linkar para ele por engano.
+        source: "/(admin|login)/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

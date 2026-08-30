@@ -1,0 +1,395 @@
+/**
+ * CSS do painel administrativo. Reaproveita os tokens de cor de
+ * app/globals.css (--navy, --orange etc.) para o painel parecer da mesma
+ * marca, mas fica num arquivo à parte, importado só pelo layout de /admin
+ * e /login — o site público nunca carrega isto.
+ */
+
+.admin {
+  --admin-bg: var(--off-white);
+  --admin-sidebar: var(--navy);
+  --admin-sidebar-text: #c7d2e2;
+  --admin-sidebar-text-active: #ffffff;
+  --admin-card: #ffffff;
+  --admin-line: var(--line);
+  --admin-text: var(--graphite);
+  --admin-text-muted: var(--text-muted);
+  --admin-success: #16a34a;
+  --admin-warning: #d97706;
+  --admin-danger: #dc2626;
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 860px) {
+  .admin {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- sidebar ---------- */
+
+.admin__sidebar {
+  background: var(--admin-sidebar);
+  color: var(--admin-sidebar-text);
+  padding: 1.5rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 860px) {
+  .admin__sidebar {
+    display: none;
+  }
+}
+
+.admin__brand {
+  padding: 0 1.25rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.admin__brand small {
+  display: block;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--admin-sidebar-text);
+  margin-top: 0.15rem;
+}
+
+.admin__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0 0.75rem;
+}
+
+.admin__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--r-sm);
+  color: var(--admin-sidebar-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.admin__nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.admin__nav-item[aria-current="page"] {
+  background: var(--orange);
+  color: var(--navy);
+}
+
+.admin__nav-item svg {
+  flex: none;
+}
+
+.admin__sidebar-footer {
+  margin-top: auto;
+  padding: 1rem 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin__logout {
+  background: none;
+  border: 0;
+  color: var(--admin-sidebar-text);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  padding: 0;
+}
+.admin__logout:hover {
+  color: #fff;
+}
+
+/* ---------- corpo ---------- */
+
+.admin__main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.25rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--admin-line);
+  background: var(--admin-card);
+}
+
+.admin__header h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+}
+
+.admin__content {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* ---------- cartões de estatística ---------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--r-md);
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.stat-card__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted);
+}
+
+.stat-card__value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- painel / cartão genérico ---------- */
+
+.admin-panel {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--r-md);
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.admin-panel h2 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 1rem;
+}
+
+/* ---------- filtros ---------- */
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.admin-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.admin-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--admin-text-muted);
+}
+
+.admin-field select,
+.admin-field input {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 0.5rem 0.65rem;
+  font: inherit;
+  color: var(--admin-text);
+  background: #fff;
+  min-width: 140px;
+}
+.admin-field select:focus-visible,
+.admin-field input:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+/* ---------- tabela ---------- */
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.admin-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted);
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--admin-line);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--admin-line);
+  vertical-align: top;
+}
+
+.admin-table tbody tr:hover {
+  background: var(--surface);
+}
+
+/* ---------- badge de status ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--r-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.badge--novo { background: var(--orange-050); color: var(--orange-600); }
+.badge--atendido { background: #eff6ff; color: #1d4ed8; }
+.badge--fechado { background: #ecfdf3; color: var(--admin-success); }
+.badge--perdido { background: #fef2f2; color: var(--admin-danger); }
+
+/* ---------- botões do painel ---------- */
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.admin-btn--primary {
+  background: var(--orange);
+  color: var(--navy);
+}
+.admin-btn--primary:hover { background: var(--orange-hover); }
+.admin-btn--ghost {
+  background: #fff;
+  border-color: var(--line-strong);
+  color: var(--admin-text);
+}
+.admin-btn--ghost:hover { border-color: var(--navy); }
+.admin-btn--danger {
+  background: #fff;
+  border-color: var(--admin-danger);
+  color: var(--admin-danger);
+}
+
+/* ---------- login ---------- */
+
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  padding: 1.5rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border-radius: var(--r-lg);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.login-card h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+}
+.login-card p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.login-field {
+  display: grid;
+  gap: 0.4rem;
+}
+.login-field label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.login-field input {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+}
+.login-field input:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+.login-error {
+  background: #fef2f2;
+  color: var(--admin-danger);
+  border-radius: var(--r-sm);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ---------- formulário genérico ---------- */
+
+.admin-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 640px;
+}
+.admin-form .admin-field {
+  max-width: 480px;
+}
+.admin-form textarea {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  resize: vertical;
+}

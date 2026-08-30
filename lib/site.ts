@@ -63,11 +63,17 @@ export const cta = {
 
 export type NavItem = { label: string; href: string };
 
+/**
+ * Âncoras da home, prefixadas com "/" para funcionarem também a partir de
+ * outra página (o blog, por exemplo) — sem o prefixo, o navegador tenta
+ * rolar até a âncora na página atual em vez de ir para a home.
+ */
 export const nav: NavItem[] = [
-  { label: "Serviços", href: "#servicos" },
-  { label: "Trabalhos", href: "#trabalhos" },
-  { label: "Como funciona", href: "#como-funciona" },
-  { label: "Áreas atendidas", href: "#areas" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Trabalhos", href: "/#trabalhos" },
+  { label: "Como funciona", href: "/#como-funciona" },
+  { label: "Áreas atendidas", href: "/#areas" },
+  { label: "Blog", href: "/blog/" },
 ];
 
 export type IconName = "casa" | "loja" | "fachada" | "condominio";

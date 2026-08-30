@@ -1758,4 +1758,112 @@ body {
   border: 0;
 }
 
-/* O fieldset do formulário não deve herdar caixa nem espaçamento do agente */
+/* --------------------------------------------------------------------------
+   Blog
+   -------------------------------------------------------------------------- */
+
+.shell--narrow {
+  max-width: 760px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.blog-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.blog-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.blog-card__img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.blog-card__img--placeholder {
+  background: linear-gradient(135deg, var(--navy-050), var(--orange-050));
+}
+
+.blog-card__body {
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.blog-card__data {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orange-600);
+}
+
+.blog-card__body h2 {
+  font-size: 1.0625rem;
+  color: var(--navy);
+  margin: 0;
+}
+
+.blog-card__body p {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.article__cover {
+  width: 100%;
+  border-radius: var(--r-md);
+  margin: 1.5rem 0;
+}
+
+.article {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-body);
+}
+.article h2 {
+  font-size: 1.375rem;
+  color: var(--navy);
+  margin: 2rem 0 0.75rem;
+}
+.article h3 {
+  font-size: 1.125rem;
+  color: var(--navy);
+  margin: 1.5rem 0 0.6rem;
+}
+.article p {
+  margin: 0 0 1.1rem;
+}
+.article ul,
+.article ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.4rem;
+}
+.article a {
+  color: var(--orange-600);
+  text-decoration: underline;
+}
+.article img {
+  max-width: 100%;
+  border-radius: var(--r-sm);
+}
+.article blockquote {
+  border-left: 3px solid var(--orange);
+  margin: 1.25rem 0;
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  color: var(--text-muted);
+}

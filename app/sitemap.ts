@@ -1,14 +1,13 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { getPublishedPosts } from "@/lib/blog";
 
-// Necessario com output: "export" — a rota e gerada em build.
-export const dynamic = "force-static";
+/** Lê os posts publicados no banco a cada geração — não pode ser estático. */
+export const dynamic = "force-dynamic";
 
-/**
- * Hoje o site tem apenas a home. Ao criar as paginas locais e de servico
- * (docs/03_SEO/SEO-LOCAL.md), adicione cada rota nesta lista.
- */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getPublishedPosts();
+
   return [
     {
       url: `${site.url}/`,
@@ -16,5 +15,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${site.url}/blog/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    ...posts.map((post) => ({
+      url: `${site.url}/blog/${post.slug}/`,
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    })),
   ];
 }
