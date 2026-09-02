@@ -1,5 +1,13 @@
-import { auth } from "@/lib/auth";
+import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
+import { authConfig } from "@/lib/auth.config";
+
+/**
+ * Instância separada, só com a config leve (sem provider) — evita que o
+ * bundle do middleware (Edge Runtime, limite de 1MB na Vercel) puxe
+ * Prisma/bcrypt de lib/auth.ts.
+ */
+const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
