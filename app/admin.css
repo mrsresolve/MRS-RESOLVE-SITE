@@ -367,6 +367,35 @@
   outline-offset: 1px;
 }
 
+.login-field__password {
+  position: relative;
+}
+.login-field__password input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+.login-field__toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  padding: 0.3rem;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--r-sm);
+}
+.login-field__toggle:hover {
+  color: var(--navy);
+}
+.login-field__toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
 .login-error {
   background: #fef2f2;
   color: var(--admin-danger);

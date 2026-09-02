@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useActionState } from "react";
 import { login, type LoginState } from "./actions";
+import { EyeIcon, EyeOffIcon } from "@/components/admin/Icons";
 
 const initialState: LoginState = {};
 
 export function LoginForm({ proximo }: { proximo?: string }) {
   const [state, formAction, pending] = useActionState(login, initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <form action={formAction} className="login-card" style={{ padding: 0, boxShadow: "none" }}>
@@ -21,7 +24,23 @@ export function LoginForm({ proximo }: { proximo?: string }) {
 
       <div className="login-field">
         <label htmlFor="password">Senha</label>
-        <input id="password" name="password" type="password" required autoComplete="current-password" />
+        <div className="login-field__password">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            required
+            autoComplete="current-password"
+          />
+          <button
+            type="button"
+            className="login-field__toggle"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+          >
+            {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
+          </button>
+        </div>
       </div>
 
       <button type="submit" className="admin-btn admin-btn--primary" disabled={pending}>
