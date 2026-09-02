@@ -1,6 +1,6 @@
 import { areas, cta, site } from "@/lib/site";
-import { whatsappUrl } from "@/lib/whatsapp";
 import { ArrowUpRight, PinIcon } from "./Icons";
+import { WhatsAppLink } from "./WhatsAppLink";
 
 export function Areas() {
   return (
@@ -17,23 +17,12 @@ export function Areas() {
             lista, consulte a disponibilidade.
           </p>
           <div className="cta-pair">
-            <a
-              className="btn btn--navy"
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <WhatsAppLink className="btn btn--navy" botao="areas_primary">
               {cta.areas}
-            </a>
-            <a
-              className="btn-arrow"
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Falar no WhatsApp"
-            >
+            </WhatsAppLink>
+            <WhatsAppLink className="btn-arrow" botao="areas_secondary" aria-label="Falar no WhatsApp">
               <ArrowUpRight />
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
 

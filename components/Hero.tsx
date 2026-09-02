@@ -1,7 +1,7 @@
 import { cta, site } from "@/lib/site";
-import { whatsappUrl } from "@/lib/whatsapp";
 import { HeroVideo } from "./HeroVideo";
 import { ArrowUpRight, WhatsAppIcon } from "./Icons";
+import { WhatsAppLink } from "./WhatsAppLink";
 
 const chips = [
   { label: "Residencial", index: "01" },
@@ -28,23 +28,12 @@ export function Hero() {
           </p>
 
           <div className="cta-pair">
-            <a
-              className="btn btn--primary btn--lg"
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <WhatsAppLink className="btn btn--primary btn--lg" botao="hero_primary">
               {cta.primary}
-            </a>
-            <a
-              className="btn-arrow"
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Falar no WhatsApp"
-            >
+            </WhatsAppLink>
+            <WhatsAppLink className="btn-arrow" botao="hero_secondary" aria-label="Falar no WhatsApp">
               <ArrowUpRight />
-            </a>
+            </WhatsAppLink>
           </div>
 
           <p className="hero__support">

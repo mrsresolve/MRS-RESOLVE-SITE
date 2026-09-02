@@ -1,6 +1,6 @@
 import { cta, site } from "@/lib/site";
-import { whatsappUrl } from "@/lib/whatsapp";
 import { PhoneIcon, WhatsAppIcon } from "./Icons";
+import { WhatsAppLink } from "./WhatsAppLink";
 
 export function FinalCta() {
   return (
@@ -12,15 +12,10 @@ export function FinalCta() {
             Solicite seu orçamento e fale diretamente com a {site.name}.
           </p>
           <div className="actions">
-            <a
-              className="btn btn--primary btn--lg"
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <WhatsAppLink className="btn btn--primary btn--lg" botao="final_cta">
               <WhatsAppIcon />
               {cta.final}
-            </a>
+            </WhatsAppLink>
             <a className="btn btn--ghost btn--lg" href={`tel:${site.phoneTel}`}
                style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}>
               <PhoneIcon />

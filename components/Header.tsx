@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { cta, nav, site } from "@/lib/site";
-import { whatsappUrl } from "@/lib/whatsapp";
 import { CloseIcon, MenuIcon, PhoneIcon } from "./Icons";
+import { WhatsAppLink } from "./WhatsAppLink";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,14 +58,9 @@ export function Header() {
             {site.phoneDisplay}
           </a>
 
-          <a
-            className="btn btn--primary header__cta"
-            href={whatsappUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <WhatsAppLink className="btn btn--primary header__cta" botao="header">
             {cta.primaryShort}
-          </a>
+          </WhatsAppLink>
 
           <button
             type="button"

@@ -1,5 +1,5 @@
 import { areas, nav, services, site } from "@/lib/site";
-import { whatsappUrl } from "@/lib/whatsapp";
+import { WhatsAppLink } from "./WhatsAppLink";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -36,9 +36,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
-                  Orçamento
-                </a>
+                <WhatsAppLink botao="footer_nav">Orçamento</WhatsAppLink>
               </li>
             </ul>
           </div>
@@ -47,13 +45,9 @@ export function Footer() {
             <h3>Contato</h3>
             <ul className="footer__links">
               <li>
-                <a
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <WhatsAppLink botao="footer_contato">
                   WhatsApp {site.phoneDisplay}
-                </a>
+                </WhatsAppLink>
               </li>
               <li>
                 <a href={`tel:${site.phoneTel}`}>Ligar {site.phoneDisplay}</a>
